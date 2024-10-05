@@ -38,7 +38,6 @@ topology:
         - ip -6 address add 2002::172:17:0:1/96 dev eth1
         - iperf3 -s -p 5201 -D > iperf3_1.log
         - iperf3 -s -p 5202 -D > iperf3_2.log
-      group: server
 
     client2:
       kind: linux
@@ -48,17 +47,15 @@ topology:
       exec:
         - ip address add 172.17.0.2/24 dev eth1
         - ip -6 address add 2002::172:17:0:2/96 dev eth1
-      group: server
 
     client3:
-      image: ghcr.io/srl-labs/network-multitool
       kind: linux
+      image: ghcr.io/srl-labs/network-multitool
       binds:
         - clients/client3:/config
       exec:
         - ip address add 172.17.0.3/24 dev eth1
         - ip -6 address add 2002::172:17:0:3/96 dev eth1
-      group: server
 
 
     # Telemetry components
