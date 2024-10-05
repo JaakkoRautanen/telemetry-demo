@@ -6,12 +6,9 @@ In this lab there is a small network of Nokia SR Linux switches (because they ar
 
 > Note: This lab is greatly inspired by [Nokia SR Linux Streaming Telemetry Lab](https://github.com/srl-labs/srl-telemetry-lab) and uses their images for clients and devcontainer. Network part is mostly copied from there. Automation stack sligtly differs.
 
-
 <span style="color:red"> diagram for the lab topology</span>
 
 <span style="color:red"> screenshots from grafana</span>
-
-
 
 ## Starting the lab
 
