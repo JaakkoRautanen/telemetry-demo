@@ -16,17 +16,17 @@ In this lab there is a small network of Nokia SR Linux switches (because they ar
 ## Starting the lab
 
 <div align=center markdown>
-<a href="https://codespaces.new/JaakkoRautanen/telemetry-lab?quickstart=1">
+<a href="https://codespaces.new/JaakkoRautanen/telemetry-deno?quickstart=1">
 <img src="https://gitlab.com/rdodin/pics/-/wikis/uploads/d78a6f9f6869b3ac3c286928dd52fa08/run_in_codespaces-v1.svg?sanitize=true" style="width:50%"/></a>
 
-**[Run](https://codespaces.new/JaakkoRautanen/telemetry-lab?quickstart=1) this lab in GitHub Codespaces for free**.  
+**[Run](https://codespaces.new/JaakkoRautanen/telemetry-demo?quickstart=1) this lab in GitHub Codespaces for free**.  
 [Learn more](https://containerlab.dev/manual/codespaces) about Containerlab for Codespaces.  
 <small>Machine type: 4 vCPU · 8 GB RAM</small>
 </div>
 
 This lab can be run completely on Github Codespaces:
 
-1. Click [Run In Codespaces](https://codespaces.new/JaakkoRautanen/telemetry-lab?quickstart=1)
+1. Click [Run In Codespaces](https://codespaces.new/JaakkoRautanen/telemetry-demo?quickstart=1)
 2. Start containerlab by typing ```sudo clab deploy``` to terminal which opened in VScode inside browser
 
 ## Stopping lab
