@@ -29,3 +29,11 @@ This lab can be run completely on Github Codespaces:
 ## Stopping lab
 
 Press `Ctrl` + `Shift` + `P` to open command palette in VScode and select `Codespaces: Stop codespace`. After that lab is stopped and doesn't consume your Codespaces quota.
+
+## Usefull information
+
+| System                | Username/password     |
+|-----------------------|-----------------------|
+| Grafana               | grafana/grafana       |
+| InfluxDB              | influx/influxinflux   |
+| SR-Linux Switches     | admin/NokiaSrl1!      |
