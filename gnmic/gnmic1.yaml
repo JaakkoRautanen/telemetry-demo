@@ -21,15 +21,15 @@ subscriptions:
     paths:
       - /interface[name=ethernet-1/*]/oper-state
     mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+    stream-mode: on-change
+    heartbeat-interval: 50s
 
   srl_if_admin_state:
     paths:
       - /interface[name=ethernet-1/*]/admin-state
     mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+    stream-mode: on-change
+    heartbeat-interval: 50s
 
   #srl_net_instance:
   #  paths:
@@ -38,12 +38,12 @@ subscriptions:
   #  stream-mode: sample
   #  sample-interval: 5s
 
-  #srl_if_stats:
-  #  paths:
-  #    - /interface[name=ethernet-1/*]/statistics
-  #  mode: stream
-  #  stream-mode: sample
-  #  sample-interval: 5s
+  srl_if_stats:
+    paths:
+      - /interface[name=ethernet-1/*]/statistics
+    mode: stream
+    stream-mode: sample
+    sample-interval: 1s
 
   srl_if_traffic_rate:
     paths:
@@ -114,5 +114,7 @@ processors:
       # list of regex to be matched with the values names
       value-names: 
         - ".*bps$"
+        - ".*packets$"
+        - ".*octets$"
       # the desired value type, one of: int, uint, string, float, bool
       type: int
