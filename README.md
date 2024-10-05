@@ -4,6 +4,8 @@ Purpose of this lab is to demonstrate capabilities of Streaming Telemetry.
 
 In this lab there is a small network of Nokia SR Linux switches (because they are publicly available for lab use). Switches send continous stream of telemetry data to [gnmic](https://gnmic.openconfig.net/) which is gnmi collector. gnmic pushes data to InfluxDB. Grafana queries data from InfluxDB and visualizes it to dashboards.
 
+Everything in this lab is powered by [containerlab](https://containerlab.dev/).
+
 > Note: This lab is greatly inspired by [Nokia SR Linux Streaming Telemetry Lab](https://github.com/srl-labs/srl-telemetry-lab) and uses their images for clients and devcontainer. Network part is mostly copied from there. Automation stack sligtly differs.
 
 <span style="color:red"> diagram for the lab topology</span>
@@ -37,3 +39,16 @@ Press `Ctrl` + `Shift` + `P` to open command palette in VScode and select `Codes
 | Grafana               | grafana/grafana       |
 | InfluxDB              | influx/influxinflux   |
 | SR-Linux Switches     | admin/NokiaSrl1!      |
+
+### Traffic generation
+
+You can use following commands to ask clients to send some traffic:
+- `bash traffic.sh start all` - start traffic between all nodes
+- `bash traffic.sh start 1-2` - start traffic between client1 and client2
+- `bash traffic.sh start 1-3` - start traffic between client1 and client3
+  
+To stop the traffic:
+
+- `bash traffic.sh stop` - stop traffic generation between all nodes
+- `bash traffic.sh stop 1-2` - stop traffic generation between client1 and client2
+- `bash traffic.sh stop 1-3` - stop traffic generation between client1 and client3
