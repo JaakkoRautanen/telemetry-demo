@@ -1,0 +1,112 @@
+name: tellab
+
+topology:
+  
+  defaults:
+    kind: nokia_srlinux
+  
+  kinds:
+    nokia_srlinux:
+      image: ghcr.io/nokia/srlinux:24.7.2
+      type: ixrd2l
+
+  nodes:
+    ### SPINES ###
+    spine1:
+      type: ixrd3l
+      group: spine
+      startup-config: srl/spine1.cfg
+    spine2:
+      type: ixrd3l
+      startup-config: srl/spine2.cfg
+
+    ### LEAFS ###
+    leaf1:
+      startup-config: srl/leaf1.cfg
+    leaf2:
+      startup-config: srl/leaf2.cfg
+    leaf3:
+      startup-config: srl/leaf3.cfg
+
+    ### CLIENTS ###
+    client1:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+      exec:
+        - ip address add 172.17.0.1/24 dev eth1
+        - ip -6 address add 2002::172:17:0:1/96 dev eth1
+        - iperf3 -s -p 5201 -D > iperf3_1.log
+        - iperf3 -s -p 5202 -D > iperf3_2.log
+      group: server
+
+    client2:
+      kind: linux
+      image: ghcr.io/srl-labs/network-multitool
+      binds:
+        - clients/client2:/config
+      exec:
+        - ip address add 172.17.0.2/24 dev eth1
+        - ip -6 address add 2002::172:17:0:2/96 dev eth1
+      group: server
+
+    client3:
+      image: ghcr.io/srl-labs/network-multitool
+      kind: linux
+      binds:
+        - clients/client3:/config
+      exec:
+        - ip address add 172.17.0.3/24 dev eth1
+        - ip -6 address add 2002::172:17:0:3/96 dev eth1
+      group: server
+
+
+    # Telemetry components
+    gnmic1:
+      kind: linux
+      image: ghcr.io/openconfig/gnmic:0.38.2
+      binds:
+        - gnmic/gnmic1.yaml:/app/gnmic.yaml
+      cmd: "subscribe --config /app/gnmic.yaml"
+
+    influxdb:
+      kind: linux
+      image: influxdb:2.5.1
+      binds:
+        - influxdb/influxdb.conf:/etc/influxdb/influxdb.conf
+      env:
+        DOCKER_INFLUXDB_INIT_MODE: setup
+        DOCKER_INFLUXDB_INIT_USERNAME: influx
+        DOCKER_INFLUXDB_INIT_PASSWORD: influxinflux
+        DOCKER_INFLUXDB_INIT_ORG: acme
+        DOCKER_INFLUXDB_INIT_BUCKET: telemetry
+        DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: influxtoken
+      ports:
+      - "8083:8083"
+      - "8086:8086"
+      - "8090:8090"
+
+    grafana:
+      kind: linux
+      image: grafana/grafana:11.2.0
+      ports:
+      - '3000:3000'
+      binds:
+        - grafana/influxdb_datasource.yaml:/etc/grafana/provisioning/datasources/influxdb_datasource.yaml
+        - grafana/grafana-dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
+        - grafana/grafana-dashboards:/var/lib/grafana/dashboards
+        - grafana/grafana.ini:/etc/grafana/grafana.ini
+      env:
+        GF_SECURITY_ADMIN_USER: grafana
+        GF_SECURITY_ADMIN_PASSWORD: grafana
+        GF_INSTALL_PLUGINS: andrewbmchugh-flow-panel
+
+  links:
+    - endpoints: ["spine1:e1-1", "leaf1:e1-49"]
+    - endpoints: ["spine1:e1-2", "leaf2:e1-49"]
+    - endpoints: ["spine1:e1-3", "leaf3:e1-49"]
+    - endpoints: ["spine2:e1-1", "leaf1:e1-50"]
+    - endpoints: ["spine2:e1-2", "leaf2:e1-50"]
+    - endpoints: ["spine2:e1-3", "leaf3:e1-50"]
+    - endpoints: ["leaf1:e1-1", "client1:eth1"]
+    - endpoints: ["leaf2:e1-1", "client2:eth1"]
+    - endpoints: ["leaf3:e1-1", "client3:eth1"]

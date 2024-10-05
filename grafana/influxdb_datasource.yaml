@@ -1,0 +1,14 @@
+---
+apiVersion: 1
+
+datasources:
+  - name: influxdb_datasource
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    jsonData:
+      dbName: telemetry
+      httpMode: GET
+      httpHeaderName1: 'Authorization'
+    secureJsonData:
+      httpHeaderValue1: 'Token influxtoken'
