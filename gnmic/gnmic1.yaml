@@ -24,68 +24,75 @@ subscriptions:
     stream-mode: sample
     sample-interval: 5s
 
-  srl_net_instance:
+  srl_if_admin_state:
     paths:
-      - /network-instance[name=*]/oper-state
+      - /interface[name=ethernet-1/*]/admin-state
     mode: stream
     stream-mode: sample
     sample-interval: 5s
 
-  srl_if_stats:
-    paths:
-      - /interface[name=ethernet-1/*]/statistics
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+  #srl_net_instance:
+  #  paths:
+  #    - /network-instance[name=*]/oper-state
+  #  mode: stream
+  #  stream-mode: sample
+  #  sample-interval: 5s
+
+  #srl_if_stats:
+  #  paths:
+  #    - /interface[name=ethernet-1/*]/statistics
+  #  mode: stream
+  #  stream-mode: sample
+  #  sample-interval: 5s
 
   srl_if_traffic_rate:
     paths:
       - /interface[name=ethernet-1/*]/traffic-rate
     mode: stream
     stream-mode: sample
-    sample-interval: 5s
+    sample-interval: 1s
 
-  srl_cpu:
-    paths:
-      - /platform/control[slot=*]/cpu[index=all]/total
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+  #srl_cpu:
+  #  paths:
+  #    - /platform/control[slot=*]/cpu[index=all]/total
+  #  mode: stream
+  #  stream-mode: sample
+  #  sample-interval: 5s
 
-  srl_mem:
-    paths:
-      - /platform/control[slot=*]/memory
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+  #srl_mem:
+  #  paths:
+  #    - /platform/control[slot=*]/memory
+  #  mode: stream
+  #  stream-mode: sample
+  #  sample-interval: 5s
 
-  srl_bgp_stats:
-    paths:
-      - /network-instance[name=*]/protocols/bgp/statistics
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+  #srl_bgp_stats:
+  #  paths:
+  #    - /network-instance[name=*]/protocols/bgp/statistics
+  #  mode: stream
+  #  stream-mode: sample
+  #  sample-interval: 5s
 
-  srl_ipv4_routes:
-    paths:
-      - /network-instance[name=*]/route-table/ipv4-unicast/statistics/
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+  #srl_ipv4_routes:
+  #  paths:
+  #    - /network-instance[name=*]/route-table/ipv4-unicast/statistics/
+  #  mode: stream
+  #  stream-mode: sample
+  #  sample-interval: 5s
 
-  srl_ipv6_routes:
-    paths:
-      - /network-instance[name=*]/route-table/ipv6-unicast/statistics/
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+  #srl_ipv6_routes:
+  #  paths:
+  #    - /network-instance[name=*]/route-table/ipv6-unicast/statistics/
+  #  mode: stream
+  #  stream-mode: sample
+  #  sample-interval: 5s
 
-  srl_apps:
-    paths:
-      - /system/app-management/application[name=*]
-    mode: stream
-    stream-mode: sample
-    sample-interval: 5s
+  #srl_apps:
+  #  paths:
+  #    - /system/app-management/application[name=*]
+  #  mode: stream
+  #  stream-mode: sample
+  #  sample-interval: 5s
 
 outputs:
   influxdb-output:
@@ -98,3 +105,14 @@ outputs:
     org: acme
     override-timestamps: true
     #delete-tag: deleted
+    event-processors:
+      - convert-int-processor
+
+processors:
+  convert-int-processor:
+    event-convert:
+      # list of regex to be matched with the values names
+      value-names: 
+        - ".*bps$"
+      # the desired value type, one of: int, uint, string, float, bool
+      type: int
