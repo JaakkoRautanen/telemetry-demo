@@ -73,19 +73,19 @@ subscriptions:
     stream-mode: sample
     sample-interval: 5s
 
-  #srl_ipv4_routes:
-  #  paths:
-  #    - /network-instance[name=*]/route-table/ipv4-unicast/statistics/
-  #  mode: stream
-  #  stream-mode: sample
-  #  sample-interval: 5s
+  srl_ipv4_routes:
+    paths:
+      - /network-instance[name=*]/route-table/ipv4-unicast/statistics/
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
 
-  #srl_ipv6_routes:
-  #  paths:
-  #    - /network-instance[name=*]/route-table/ipv6-unicast/statistics/
-  #  mode: stream
-  #  stream-mode: sample
-  #  sample-interval: 5s
+  srl_ipv6_routes:
+    paths:
+      - /network-instance[name=*]/route-table/ipv6-unicast/statistics/
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
 
   #srl_apps:
   #  paths:
@@ -93,6 +93,12 @@ subscriptions:
   #  mode: stream
   #  stream-mode: sample
   #  sample-interval: 5s
+
+  srl_arp:
+    paths:
+      - /interface[name=*]/subinterface[index=*]/ipv4/arp/neighbor[ipv4-address=*]/
+    mode: stream
+    stream-mode: on-change
 
 outputs:
   influxdb-output:
