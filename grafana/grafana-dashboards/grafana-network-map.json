@@ -28,7 +28,7 @@
         "uid": "P6BD63040A6BBA25F"
       },
       "gridPos": {
-        "h": 24,
+        "h": 17,
         "w": 24,
         "x": 0,
         "y": 0
@@ -269,6 +269,6 @@
   "timezone": "browser",
   "title": "Network map",
   "uid": "fe05khllyot8gd",
-  "version": 10,
+  "version": 1,
   "weekStart": ""
 }

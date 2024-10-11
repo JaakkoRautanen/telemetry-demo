@@ -66,12 +66,12 @@ subscriptions:
   #  stream-mode: sample
   #  sample-interval: 5s
 
-  #srl_bgp_stats:
-  #  paths:
-  #    - /network-instance[name=*]/protocols/bgp/statistics
-  #  mode: stream
-  #  stream-mode: sample
-  #  sample-interval: 5s
+  srl_bgp_stats:
+    paths:
+      - /network-instance[name=*]/protocols/bgp/statistics
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
 
   #srl_ipv4_routes:
   #  paths:
