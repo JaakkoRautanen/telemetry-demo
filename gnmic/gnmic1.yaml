@@ -52,20 +52,6 @@ subscriptions:
     stream-mode: sample
     sample-interval: 1s
 
-  #srl_cpu:
-  #  paths:
-  #    - /platform/control[slot=*]/cpu[index=all]/total
-  #  mode: stream
-  #  stream-mode: sample
-  #  sample-interval: 5s
-
-  #srl_mem:
-  #  paths:
-  #    - /platform/control[slot=*]/memory
-  #  mode: stream
-  #  stream-mode: sample
-  #  sample-interval: 5s
-
   srl_bgp_stats:
     paths:
       - /network-instance[name=*]/protocols/bgp/statistics
@@ -80,20 +66,20 @@ subscriptions:
     stream-mode: sample
     sample-interval: 5s
 
+  srl_ipv4_route_table:
+    paths:
+      - /network-instance[name=*]/route-table/ipv4-unicast/
+    mode: stream
+    stream-mode: on-change
+    
+
   srl_ipv6_routes:
     paths:
       - /network-instance[name=*]/route-table/ipv6-unicast/statistics/
     mode: stream
     stream-mode: sample
     sample-interval: 5s
-
-  #srl_apps:
-  #  paths:
-  #    - /system/app-management/application[name=*]
-  #  mode: stream
-  #  stream-mode: sample
-  #  sample-interval: 5s
-
+    
   srl_arp:
     paths:
       - /interface[name=*]/subinterface[index=*]/ipv4/arp/neighbor[ipv4-address=*]/
