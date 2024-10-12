@@ -72,18 +72,21 @@ subscriptions:
       - /network-instance[name=*]/route-table/ipv4-unicast/
     mode: stream
     stream-mode: on-change
+    heartbeat-interval: 50s
 
   srl_nh_groups:
     paths:
       - /network-instance[name=*]/route-table/next-hop-group[index=*]/next-hop[id=*]/next-hop
     mode: stream
     stream-mode: on-change
+    heartbeat-interval: 50s
 
   srl_next_hops:
     paths:
       - /network-instance[name=*]/route-table/next-hop[index=*]/
     mode: stream
     stream-mode: on-change
+    heartbeat-interval: 50s
 
   srl_ipv6_routes:
     paths:

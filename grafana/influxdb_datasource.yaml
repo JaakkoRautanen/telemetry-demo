@@ -12,3 +12,16 @@ datasources:
       httpHeaderName1: 'Authorization'
     secureJsonData:
       httpHeaderValue1: 'Token influxtoken'
+
+  - name: influxdb_flux_datasource
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    isDefault: false
+    jsonData:
+      organization: acme
+      defaultBucket: telemetry
+      version: Flux
+      tlsSkipVerify: true
+    secureJsonData:
+      token: 'influxtoken'

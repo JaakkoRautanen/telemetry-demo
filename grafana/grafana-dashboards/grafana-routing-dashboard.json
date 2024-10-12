@@ -208,6 +208,310 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto",
+              "wrapText": false
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 11
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "NH group Index"
+          }
+        ]
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P6BD63040A6BBA25F"
+          },
+          "groupBy": [],
+          "measurement": "srl_nh_groups",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric\", \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active\", \"route_ipv4-prefix \" FROM \"srl_ipv4_route_table\" WHERE $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:next-hop-group/next-hop/next-hop"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "next-hop-group_index"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "source::tag",
+              "operator": "=~",
+              "value": "/^$Device_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "network-instance_name::tag",
+              "operator": "=~",
+              "value": "/^$network_instance$/"
+            }
+          ]
+        }
+      ],
+      "title": "NH Groups",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": 4,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": 2,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": 1,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance": 5,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference": 3,
+              "Time": 6,
+              "route_ipv4-prefix": 0
+            },
+            "renameByName": {
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": "Active",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": "Metric",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": "Next Hop Group",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance": "NH Network Instance",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference": "Preference",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:next-hop-group/next-hop/next-hop": "NH index",
+              "Time": "",
+              "next-hop-group_index": "NH group Index",
+              "route_ipv4-prefix": "Prefix"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "influxdb",
+        "uid": "P6BD63040A6BBA25F"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto",
+              "wrapText": false
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 11
+      },
+      "id": 4,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "next-hop_index"
+          }
+        ]
+      },
+      "pluginVersion": "11.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P6BD63040A6BBA25F"
+          },
+          "groupBy": [],
+          "measurement": "srl_next_hops",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric\", \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active\", \"route_ipv4-prefix \" FROM \"srl_ipv4_route_table\" WHERE $timeFilter",
+          "rawQuery": false,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:next-hop/ip-address"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "next-hop_index"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:next-hop/subinterface"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "source::tag",
+              "operator": "=~",
+              "value": "/^$Device_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "network-instance_name::tag",
+              "operator": "=~",
+              "value": "/^$network_instance$/"
+            }
+          ]
+        }
+      ],
+      "title": "Next-hops",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": false
+            },
+            "includeByName": {},
+            "indexByName": {
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": 4,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": 2,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": 1,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance": 5,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference": 3,
+              "Time": 6,
+              "route_ipv4-prefix": 0
+            },
+            "renameByName": {
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": "Active",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": "Metric",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": "Next Hop Group",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance": "NH Network Instance",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference": "Preference",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:next-hop/ip-address": "NH IP address",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:next-hop/network-instance": "Network instance",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:next-hop/subinterface": "Interface",
+              "Time": "",
+              "next-hop_index": "NH Index",
+              "route_ipv4-prefix": "Prefix"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "default": true,
+        "type": "influxdb",
+        "uid": "P6BD63040A6BBA25F"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -264,7 +568,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 19
       },
       "id": 1,
       "options": {
@@ -348,7 +652,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "leaf1",
           "value": "leaf1"
         },
@@ -375,9 +679,13 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "default",
           "value": "default"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "P6BD63040A6BBA25F"
         },
         "definition": "SHOW TAG VALUES WITH KEY=\"network-instance_name\"",
         "hide": 0,
@@ -388,6 +696,50 @@
         "options": [],
         "query": {
           "query": "SHOW TAG VALUES WITH KEY=\"network-instance_name\"",
+          "refId": "InfluxVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "545675453",
+          "value": "545675453"
+        },
+        "definition": "SHOW TAG VALUES WITH KEY = \"next-hop-group_index\"",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "next_hop_group_index",
+        "options": [],
+        "query": {
+          "query": "SHOW TAG VALUES WITH KEY = \"next-hop-group_index\"",
+          "refId": "InfluxVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "3",
+          "value": "3"
+        },
+        "definition": "SHOW TAG VALUES WITH KEY = \"next-hop_index\"",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "next_hop_index",
+        "options": [],
+        "query": {
+          "query": "SHOW TAG VALUES WITH KEY = \"next-hop_index\"",
           "refId": "InfluxVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -420,6 +772,6 @@
   "timezone": "browser",
   "title": "Routing",
   "uid": "fe0ksjpr9ufpca",
-  "version": 1,
+  "version": 5,
   "weekStart": ""
 }
