@@ -8,6 +8,7 @@ port: 57400
 timeout: 10s
 skip-verify: true
 encoding: json_ietf
+log: true
 
 targets:
   leaf1:
@@ -31,12 +32,12 @@ subscriptions:
     stream-mode: on-change
     heartbeat-interval: 50s
 
-  #srl_net_instance:
-  #  paths:
-  #    - /network-instance[name=*]/oper-state
-  #  mode: stream
-  #  stream-mode: sample
-  #  sample-interval: 5s
+  srl_net_instance:
+    paths:
+      - /network-instance[name=*]/oper-state
+    mode: stream
+    stream-mode: sample
+    sample-interval: 5s
 
   srl_if_stats:
     paths:
@@ -71,7 +72,18 @@ subscriptions:
       - /network-instance[name=*]/route-table/ipv4-unicast/
     mode: stream
     stream-mode: on-change
-    
+
+  srl_nh_groups:
+    paths:
+      - /network-instance[name=*]/route-table/next-hop-group[index=*]/next-hop[id=*]/next-hop
+    mode: stream
+    stream-mode: on-change
+
+  srl_next_hops:
+    paths:
+      - /network-instance[name=*]/route-table/next-hop[index=*]/
+    mode: stream
+    stream-mode: on-change
 
   srl_ipv6_routes:
     paths:
@@ -96,9 +108,9 @@ outputs:
     flush-timer: 1s
     org: acme
     override-timestamps: true
-    #delete-tag: deleted
     event-processors:
       - convert-int-processor
+    #delete-tag: del
 
 processors:
   convert-int-processor:

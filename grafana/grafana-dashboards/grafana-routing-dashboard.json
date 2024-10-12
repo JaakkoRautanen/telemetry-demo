@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 4,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -60,7 +60,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 23,
+        "h": 11,
         "w": 24,
         "x": 0,
         "y": 0
@@ -133,6 +133,22 @@
                 ],
                 "type": "field"
               }
+            ],
+            [
+              {
+                "params": [
+                  "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance"
+                ],
+                "type": "field"
+              }
             ]
           ],
           "tags": [
@@ -140,6 +156,12 @@
               "key": "source::tag",
               "operator": "=~",
               "value": "/^$Device_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "network-instance_name::tag",
+              "operator": "=~",
+              "value": "/^$network_instance$/"
             }
           ]
         }
@@ -154,16 +176,20 @@
             },
             "includeByName": {},
             "indexByName": {
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": 2,
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": 1,
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": 3,
-              "Time": 4,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": 4,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": 2,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": 1,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance": 5,
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference": 3,
+              "Time": 6,
               "route_ipv4-prefix": 0
             },
             "renameByName": {
               "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": "Active",
               "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": "Metric",
               "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": "Next Hop Group",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance": "NH Network Instance",
+              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference": "Preference",
               "Time": "",
               "route_ipv4-prefix": "Prefix"
             }
@@ -235,10 +261,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 11
       },
       "id": 1,
       "options": {
@@ -250,7 +276,7 @@
           ],
           "displayMode": "table",
           "placement": "bottom",
-          "showLegend": true
+          "showLegend": false
         },
         "tooltip": {
           "mode": "single",
@@ -259,7 +285,6 @@
       },
       "targets": [
         {
-          "alias": "$tag_source",
           "datasource": {
             "type": "influxdb",
             "uid": "P6BD63040A6BBA25F"
@@ -270,12 +295,6 @@
                 "$__interval"
               ],
               "type": "time"
-            },
-            {
-              "params": [
-                "source::tag"
-              ],
-              "type": "tag"
             },
             {
               "params": [
@@ -303,10 +322,22 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [
+            {
+              "key": "source::tag",
+              "operator": "=~",
+              "value": "/^$Device_name$/"
+            },
+            {
+              "condition": "AND",
+              "key": "network-instance_name::tag",
+              "operator": "=~",
+              "value": "/^$network_instance$/"
+            }
+          ]
         }
       ],
-      "title": "IPv4 unicast active routes",
+      "title": "Number of IPv4 unicast active routes",
       "type": "timeseries"
     }
   ],
@@ -317,7 +348,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "leaf1",
           "value": "leaf1"
         },
@@ -334,6 +365,29 @@
         "options": [],
         "query": {
           "query": "SHOW TAG VALUES WITH KEY = \"source\"",
+          "refId": "InfluxVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "definition": "SHOW TAG VALUES WITH KEY=\"network-instance_name\"",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Network instance",
+        "multi": false,
+        "name": "network_instance",
+        "options": [],
+        "query": {
+          "query": "SHOW TAG VALUES WITH KEY=\"network-instance_name\"",
           "refId": "InfluxVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -366,6 +420,6 @@
   "timezone": "browser",
   "title": "Routing",
   "uid": "fe0ksjpr9ufpca",
-  "version": 3,
+  "version": 1,
   "weekStart": ""
 }
