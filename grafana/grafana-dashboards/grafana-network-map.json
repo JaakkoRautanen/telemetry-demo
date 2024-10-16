@@ -97,7 +97,7 @@
           "measurement": "srl_ipv4_route_table",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"telemetry\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"srl_ipv4_route_table\" and r[\"_field\"] == \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference\")",
+          "query": "from(bucket: \"telemetry\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"srl_ipv4_route_table\")\n  |> filter(fn: (r) => r[\"_field\"] == \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference\")",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "table",
@@ -621,7 +621,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "5s",
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -655,7 +655,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "default",
           "value": "default"
         },
@@ -735,8 +735,8 @@
     ]
   },
   "time": {
-    "from": "now-1h",
-    "to": "now"
+    "from": "2024-10-16T14:59:50.707Z",
+    "to": "2024-10-16T16:59:50.709Z"
   },
   "timepicker": {
     "refresh_intervals": [
