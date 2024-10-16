@@ -537,7 +537,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -664,10 +665,10 @@
         "current": {
           "selected": true,
           "text": [
-            "mgmt"
+            "default"
           ],
           "value": [
-            "mgmt"
+            "default"
           ]
         },
         "datasource": {
@@ -683,58 +684,6 @@
         "options": [],
         "query": {
           "query": "SHOW TAG VALUES WITH KEY=\"network-instance_name\"",
-          "refId": "InfluxVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "15533453",
-          "value": "15533453"
-        },
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P6BD63040A6BBA25F"
-        },
-        "definition": "SHOW TAG VALUES WITH KEY = \"next-hop-group_index\"",
-        "hide": 2,
-        "includeAll": false,
-        "multi": false,
-        "name": "next_hop_group_index",
-        "options": [],
-        "query": {
-          "query": "SHOW TAG VALUES WITH KEY = \"next-hop-group_index\"",
-          "refId": "InfluxVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "3",
-          "value": "3"
-        },
-        "datasource": {
-          "type": "influxdb",
-          "uid": "P6BD63040A6BBA25F"
-        },
-        "definition": "SHOW TAG VALUES WITH KEY = \"next-hop_index\"",
-        "hide": 2,
-        "includeAll": false,
-        "multi": false,
-        "name": "next_hop_index",
-        "options": [],
-        "query": {
-          "query": "SHOW TAG VALUES WITH KEY = \"next-hop_index\"",
           "refId": "InfluxVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
