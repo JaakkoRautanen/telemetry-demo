@@ -97,7 +97,7 @@
           "measurement": "srl_ipv4_route_table",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "from(bucket: \"telemetry\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"srl_ipv4_route_table\")\n  |> filter(fn: (r) => r[\"_field\"] == \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference\")",
+          "query": "from(bucket: \"telemetry\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"srl_ipv4_route_table\")\n  |> filter(fn: (r) => r[\"_field\"] == \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference\")\n  |> filter(fn: (r) => r[\"source\"] == \"${Device_name}\")\n  |> filter(fn: (r) => r[\"network-instance_name\"] == \"${network_instance}\")",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "table",
@@ -170,7 +170,15 @@
       "transformations": [
         {
           "id": "labelsToFields",
-          "options": {}
+          "options": {
+            "keepLabels": [
+              "network-instance_name",
+              "route_ipv4-prefix",
+              "route_route-type",
+              "source"
+            ],
+            "mode": "columns"
+          }
         }
       ],
       "type": "table"
@@ -621,14 +629,13 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "leaf1",
           "value": "leaf1"
         },
@@ -638,9 +645,9 @@
         },
         "definition": "SHOW TAG VALUES WITH KEY = \"source\"",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Device",
-        "multi": false,
+        "multi": true,
         "name": "Device_name",
         "options": [],
         "query": {
@@ -655,9 +662,13 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "default",
-          "value": "default"
+          "selected": true,
+          "text": [
+            "mgmt"
+          ],
+          "value": [
+            "mgmt"
+          ]
         },
         "datasource": {
           "type": "influxdb",
@@ -665,9 +676,9 @@
         },
         "definition": "SHOW TAG VALUES WITH KEY=\"network-instance_name\"",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Network instance",
-        "multi": false,
+        "multi": true,
         "name": "network_instance",
         "options": [],
         "query": {
@@ -735,8 +746,8 @@
     ]
   },
   "time": {
-    "from": "2024-10-16T14:59:50.707Z",
-    "to": "2024-10-16T16:59:50.709Z"
+    "from": "now-3h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -756,6 +767,6 @@
   "timezone": "browser",
   "title": "Routing Flux",
   "uid": "ae0nask1vludce",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
