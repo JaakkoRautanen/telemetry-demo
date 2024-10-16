@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 5,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -97,7 +97,7 @@
           "measurement": "srl_ipv4_route_table",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "// Lets query original route table\ndata = from(bucket: \"telemetry\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"srl_ipv4_route_table\")\n  |> filter(fn: (r) => r[\"_field\"] == \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference\")\n\n// Convert tags (such as route_ipv4-prefix) to fields and write back to the database\ndata\n  |> set(key: \"_measurement\", value: \"my_route_table4\")\n  |> to(\n      bucket: \"telemetry\",\n      org: \"acme\",\n      timeColumn: \"_time\",\n      fieldFn: (r) => ({ \"route_ipv4-prefix\": r[\"route_ipv4-prefix\"] })\n    )",
+          "query": "from(bucket: \"telemetry\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"srl_ipv4_route_table\")\n  |> filter(fn: (r) => r[\"_field\"] == \"/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference\")",
           "rawQuery": false,
           "refId": "A",
           "resultFormat": "table",
@@ -169,31 +169,8 @@
       "title": "IPv4 route changes",
       "transformations": [
         {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": false
-            },
-            "includeByName": {},
-            "indexByName": {
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": 4,
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": 2,
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": 1,
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance": 5,
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference": 3,
-              "Time": 6,
-              "route_ipv4-prefix": 0
-            },
-            "renameByName": {
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/active": "Active",
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/metric": "Metric",
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group": "Next Hop Group",
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/next-hop-group-network-instance": "NH Network Instance",
-              "/srl_nokia-network-instance:network-instance/route-table/srl_nokia-ip-route-tables:ipv4-unicast/route/preference": "Preference",
-              "Time": "",
-              "route_ipv4-prefix": "Prefix"
-            }
-          }
+          "id": "labelsToFields",
+          "options": {}
         }
       ],
       "type": "table"
@@ -552,8 +529,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -645,7 +621,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "5s",
+  "refresh": "",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
@@ -707,8 +683,8 @@
       {
         "current": {
           "selected": false,
-          "text": "53204954",
-          "value": "53204954"
+          "text": "15533453",
+          "value": "15533453"
         },
         "datasource": {
           "type": "influxdb",
@@ -759,8 +735,8 @@
     ]
   },
   "time": {
-    "from": "now-1h",
-    "to": "now"
+    "from": "2024-10-16T14:59:50.707Z",
+    "to": "2024-10-16T16:59:50.709Z"
   },
   "timepicker": {
     "refresh_intervals": [
