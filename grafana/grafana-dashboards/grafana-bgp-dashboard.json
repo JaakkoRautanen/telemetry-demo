@@ -83,7 +83,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 14,
         "w": 8,
         "x": 0,
         "y": 0
@@ -225,7 +225,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 14,
         "w": 8,
         "x": 8,
         "y": 0
@@ -307,7 +307,7 @@
     },
     {
       "datasource": {
-        "default": true,
+        "default": false,
         "type": "influxdb",
         "uid": "P6BD63040A6BBA25F"
       },
@@ -368,7 +368,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 14,
         "w": 8,
         "x": 16,
         "y": 0
@@ -420,8 +420,8 @@
           "measurement": "srl_bgp_stats",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(\"/srl_nokia-network-instance:network-instance/protocols/srl_nokia-bgp:bgp/statistics/total-peers\") -  mean(\"/srl_nokia-network-instance:network-instance/protocols/srl_nokia-bgp:bgp/statistics/up-peers\")  FROM \"srl_bgp_stats\" WHERE $timeFilter GROUP BY time($__interval), \"source\"::tag fill(linear)",
-          "rawQuery": false,
+          "query": "SELECT \n  mean(\"/srl_nokia-network-instance:network-instance/protocols/srl_nokia-bgp:bgp/statistics/total-peers\") - \n  mean(\"/srl_nokia-network-instance:network-instance/protocols/srl_nokia-bgp:bgp/statistics/up-peers\") \nFROM \"srl_bgp_stats\"\nWHERE (\"source\"::tag =~ /^$Device_name$/) AND $timeFilter\nGROUP BY time($__interval), \"source\"::tag fill(linear)\n",
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -490,7 +490,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -511,6 +511,6 @@
   "timezone": "browser",
   "title": "BGP Information",
   "uid": "be0kqd0t2pv5sd",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }
