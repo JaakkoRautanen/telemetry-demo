@@ -14,11 +14,12 @@ Everything in this lab is powered by [containerlab](https://containerlab.dev/).
 
 ## Telemetry dashboards
 
-![](pictures/image-2.png)
-![](pictures/image-3.png)
-![](pictures/image-5.png)
-![](pictures/image-7.png)
-![](pictures/image-14.png)
+| ![](pictures/image-2.png) | ![](pictures/image-3.png) |
+|---------------------------|---------------------------|
+| ![](pictures/image-5.png) | ![](pictures/image-7.png) |
+| ![](pictures/image-14.png)|                           |
+
+
 
 ## Starting the lab
 
