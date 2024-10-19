@@ -54,6 +54,8 @@ This lab can be run completely on Github Codespaces:
 
 Press `Ctrl` + `Shift` + `P` to open command palette in VScode and select `Codespaces: Stop codespace`. After that lab is stopped and doesn't consume your Codespaces quota.
 
+If you just want to stop container lab type ```sudo clab destroy```
+
 ## Usefull information
 
 | System                | Username/password     |
