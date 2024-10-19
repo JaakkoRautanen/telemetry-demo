@@ -8,9 +8,17 @@ Everything in this lab is powered by [containerlab](https://containerlab.dev/).
 
 > Note: This lab is greatly inspired by [Nokia SR Linux Streaming Telemetry Lab](https://github.com/srl-labs/srl-telemetry-lab) and uses their images for clients and devcontainer. Network part is mostly copied from there. Automation stack sligtly differs.
 
-<span style="color:red"> diagram for the lab topology</span>
+## Lab topology
 
-<span style="color:red"> screenshots from grafana</span>
+![](pictures/image-13.png)
+
+## Telemetry dashboards
+
+![](pictures/image-2.png)
+![](pictures/image-3.png)
+![](pictures/image-5.png)
+![](pictures/image-7.png)
+![](pictures/image-14.png)
 
 ## Starting the lab
 
