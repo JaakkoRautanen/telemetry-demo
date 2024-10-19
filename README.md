@@ -6,11 +6,14 @@ In this lab there is a small network of Nokia SR Linux switches (because they ar
 
 Everything in this lab is powered by [containerlab](https://containerlab.dev/).
 
-> Note: This lab is greatly inspired by [Nokia SR Linux Streaming Telemetry Lab](https://github.com/srl-labs/srl-telemetry-lab) and uses their images for clients and devcontainer. Network part is mostly copied from there. Automation stack sligtly differs.
+> Note: This lab is greatly inspired by [Nokia SR Linux Streaming Telemetry Lab](https://github.com/srl-labs/srl-telemetry-lab) and uses their images for clients and devcontainer. Network part is mostly copied from there. Telemetry stack sligtly differs.
 
 ## Lab topology
 
 ![](pictures/image-13.png)
+This lab consist of five switches, three linux clients and telemetry components gNMIc, InfluxDB and Grafana. Green management network which is shown in the diagram provides connectivity between all nodes. White links form datapath between clients and switches.
+
+Note: it is not mandatory to run this lab in Codespaces. You can run this lab on any machine which has containerlab installed.
 
 
 ## Telemetry dashboards
