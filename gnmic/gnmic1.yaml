@@ -88,6 +88,12 @@ subscriptions:
     stream-mode: on-change
     heartbeat-interval: 50s
 
+  srl_lldp:
+    paths:
+      - /system/lldp/
+    mode: stream
+    stream-mode: on-change
+
   srl_ipv6_routes:
     paths:
       - /network-instance[name=*]/route-table/ipv6-unicast/statistics/
