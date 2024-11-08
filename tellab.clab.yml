@@ -61,7 +61,7 @@ topology:
     # Telemetry components
     gnmic1:
       kind: linux
-      image: ghcr.io/openconfig/gnmic:0.38.2
+      image: ghcr.io/openconfig/gnmic:0.39.0
       binds:
         - gnmic/gnmic1.yaml:/app/gnmic.yaml
       cmd: "subscribe --config /app/gnmic.yaml"
