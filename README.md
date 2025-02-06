@@ -48,7 +48,7 @@ Note: it is not mandatory to run this lab in Codespaces. You can run this lab on
 This lab can be run completely on Github Codespaces:
 
 1. Click [Run In Codespaces](https://codespaces.new/JaakkoRautanen/telemetry-demo?quickstart=1)
-2. Start containerlab by typing ```sudo clab deploy``` to terminal which opened in VScode inside browser
+2. Start containerlab by typing ```sudo clab deploy``` to terminal which opened in VScode inside browser (or deploy from containerlab VScode extension menu)
 
 ## Stopping lab
 
