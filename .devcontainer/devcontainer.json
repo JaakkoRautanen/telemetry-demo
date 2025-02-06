@@ -4,5 +4,8 @@
         "cpus": 4, 
         "memory": "8gb",
         "storage": "32gb"
-    }
+    },
+    "extensions": [
+        "srl-labs.vscode-containerlab"
+    ]
 }
